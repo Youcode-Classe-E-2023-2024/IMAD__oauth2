@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Str; 
 class UserController extends Controller
 {
     /**
@@ -97,11 +97,12 @@ class UserController extends Controller
             $user = Auth::user();
             
             
-
+            $randstr= Str::random(40) ;
+    $token = $request->email . $randstr;
             return response()->json([
                 'status' => true,
                 'message' => 'User logged in successfully',
-                'token' => 'sdfxihaoglsgn daghjioagagagjnjjaspkgm;sag'
+                'token' => $token
             ]);
         } else {
             return response()->json([
